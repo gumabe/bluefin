@@ -13,8 +13,9 @@ KERNEL="$(rpm -q kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-rpm-ostree install screen
-rpm-ostree install /tmp/rpms/zfs/*.rpm pv
+rpm-ostree uninstall libvirt-daemon-kvm zfs-fuse libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt
+rpm-ostree install /tmp/rpms/zfs/*.rpm pv tmux
+rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt
 find /lib/modules/
 depmod -A ${KERNEL}
 # this would install a package from rpmfusion
