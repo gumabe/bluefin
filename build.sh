@@ -3,7 +3,7 @@
 set -ouex pipefail
 
 RELEASE="$(rpm -E %fedora)"
-
+KERNEL="$(rpm -q kernel --queryformat '%{VERSION}-%{RELEASE}.%{ARCH}')"
 
 ### Install packages
 
@@ -14,7 +14,9 @@ RELEASE="$(rpm -E %fedora)"
 
 # this installs a package from fedora repos
 rpm-ostree install screen
-
+rpm-ostree install /tmp/rpms/zfs/*.rpm pv
+find /lib/modules/
+depmod -A ${KERNEL}
 # this would install a package from rpmfusion
 # rpm-ostree install vlc
 
