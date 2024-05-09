@@ -63,3 +63,7 @@ RUN mkdir -p /var/lib/alternatives && \
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit
 #   see: https://coreos.github.io/rpm-ostree/container/#using-ostree-container-commit
+
+LABEL org.opencontainers.image.title="bluefin-dx"
+LABEL org.opencontainers.image.version="latest"
+LABEL org.opencontainers.image.description="This is my personal OS image."
