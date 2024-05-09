@@ -32,9 +32,8 @@ rpm-ostree install jetbrains-mono-fonts
 rpm-ostree install python3-pip
 rpm-ostree install firefoxpwa
 rpm-ostree install webapp-manager
-rpm-ostree install flameshot fedora-release-sway-atomic hyprland-devel hyprland
+rpm-ostree install flameshot fedora-release-sway-atomic hyprland-devel hyprland sway-config-fedora
 
-find /lib/modules/
 depmod -A ${KERNEL}
 
 # this would install a package from rpmfusion
