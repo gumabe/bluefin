@@ -27,7 +27,6 @@ rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-
 rpm-ostree install stow
 rpm-ostree install firefox
 rpm-ostree install chromium
-rpm-ostree install nautilus-open-any-terminal
 rpm-ostree install jetbrains-mono-fonts
 rpm-ostree install python3-pip
 rpm-ostree install firefoxpwa
