@@ -23,15 +23,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 # this installs a package from fedora repos
 rpm-ostree uninstall libvirt-daemon-kvm zfs-fuse libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt
 rpm-ostree install /tmp/rpms/zfs/*.rpm pv tmux
-rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit
-rpm-ostree install stow
-rpm-ostree install firefox
-rpm-ostree install chromium
-rpm-ostree install jetbrains-mono-fonts
-rpm-ostree install python3-pip
-rpm-ostree install firefoxpwa
-rpm-ostree install webapp-manager
-rpm-ostree install flameshot fedora-release-sway-atomic hyprland-devel hyprland sway-config-fedora
+rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit stow firefox jetbrains-mono-fonts python3-pip firefoxpwa webapp-manager flameshot fedora-release-sway-atomic sway-config-fedora
 
 depmod -A ${KERNEL}
 
