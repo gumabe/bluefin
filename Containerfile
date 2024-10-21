@@ -36,16 +36,16 @@ ARG SOURCE_IMAGE="bluefin-dx"
 ARG SOURCE_SUFFIX="-nvidia"
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
-ARG SOURCE_TAG="latest"
+ARG SOURCE_TAG="stable"
 
 
 ### 2. SOURCE IMAGE
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
 FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
-COPY --from=ghcr.io/ublue-os/ucore-kmods:testing /rpms/kmods/*.rpm /tmp/rpms/
+COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/*.rpm /tmp/rpms/
 RUN mkdir -p /tmp/rpms/zfs
-COPY --from=ghcr.io/ublue-os/ucore-kmods:testing /rpms/kmods/zfs/*.rpm /tmp/rpms/zfs/
+COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/zfs/*.rpm /tmp/rpms/zfs/
 
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
@@ -65,5 +65,5 @@ RUN mkdir -p /var/lib/alternatives && \
 #   see: https://coreos.github.io/rpm-ostree/container/#using-ostree-container-commit
 
 LABEL org.opencontainers.image.title="bluefin-dx"
-LABEL org.opencontainers.image.version="latest"
+LABEL org.opencontainers.image.version="stable"
 LABEL org.opencontainers.image.description="This is my personal OS image."
