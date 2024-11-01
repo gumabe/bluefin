@@ -32,12 +32,16 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 # this installs a package from fedora repos
 #rpm-ostree uninstall libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt
 #rpm-ostree install /tmp/rpms/zfs/*.rpm pv tmux
-rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit stow firefox jetbrains-mono-fonts python3-pip flameshot fedora-release-sway-atomic sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs kitty kitty-shell-integration kitty-terminfo alacritty inotify-tools inotify-tools-devel blueman hyprland hyprland-plugins wl-clipboard wlr-randr cliphist eww-git hypridle hyprlock hyprshot waypaper 
+rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit stow firefox jetbrains-mono-fonts python3-pip flameshot fedora-release-sway-atomic sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs kitty kitty-shell-integration kitty-terminfo alacritty inotify-tools inotify-tools-devel blueman hyprland hyprland-plugins wl-clipboard wlr-randr cliphist eww-git hypridle hyprlock hyprshot waypaper cmake cpio meson hyprland-shell-config wol-changer sway-audio-idle-inhibit at pyprland
+
+#rpm-ostree install https://prerelease.keybase.io/keybase_amd64.rpm
+
 # sddm-wayland-sway swaylock sway-contrib 
-rpm-ostree install hyprland-shell-config wol-changer  
+#rpm-ostree install 
+
 
 #Install COPR packages from tofik/sway
-rpm-ostree install sway-audio-idle-inhibit
+#rpm-ostree install sway-audio-idle-inhibit
 
 # Remove the Firefox related packages (will be installed over flatpak)
 rpm-ostree override remove firefox-langpacks firefox
