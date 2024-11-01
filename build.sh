@@ -34,8 +34,7 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 #rpm-ostree install /tmp/rpms/zfs/*.rpm pv tmux
 rpm-ostree install libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit stow firefox jetbrains-mono-fonts python3-pip flameshot fedora-release-sway-atomic sway-config-fedora terminator neovim netcat sddm-wayland-sway swaylock sway-contrib emacs-gtk+x11 emacs kitty kitty-shell-integration kitty-terminfo alacritty inotify-tools inotify-tools-devel blueman hyprland hyprland-plugins wl-clipboard wlr-randr cliphist eww-git hypridle hyprlock hyprshot waypaper 
 
-rpm-ostree install hyprland-shell-config 
-#wol-changer  
+rpm-ostree install hyprland-shell-config wol-changer  
 
 #Install COPR packages from tofik/sway
 rpm-ostree install sway-audio-idle-inhibit
