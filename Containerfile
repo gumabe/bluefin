@@ -43,9 +43,9 @@ ARG SOURCE_TAG="stable"
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
 FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
 
-COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/*.rpm /tmp/rpms/
-RUN mkdir -p /tmp/rpms/zfs
-COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/zfs/*.rpm /tmp/rpms/zfs/
+#COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/*.rpm /tmp/rpms/
+#RUN mkdir -p /tmp/rpms/zfs
+#COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/zfs/*.rpm /tmp/rpms/zfs/
 
 ### 3. MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
