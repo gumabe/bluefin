@@ -41,7 +41,8 @@ ARG SOURCE_TAG="stable"
 
 ### 2. SOURCE IMAGE
 ## this is a standard Containerfile FROM using the build ARGs above to select the right upstream image
-FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
+#FROM ghcr.io/ublue-os/${SOURCE_IMAGE}${SOURCE_SUFFIX}:${SOURCE_TAG}
+FROM ghcr.io/wayblueorg/hyprland-nvidia:latest
 
 #COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/*.rpm /tmp/rpms/
 #RUN mkdir -p /tmp/rpms/zfs
