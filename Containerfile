@@ -33,7 +33,7 @@ ARG SOURCE_IMAGE="aurora-dx"
 # - stable-zfs
 # - stable-nvidia-zfs
 # - (and the above with testing rather than stable)
-ARG SOURCE_SUFFIX="-nvidia"
+ARG SOURCE_SUFFIX="-nvidia-open"
 
 ## SOURCE_TAG arg must be a version built for the specific image: eg, 39, 40, gts, latest
 ARG SOURCE_TAG="stable"
@@ -57,8 +57,8 @@ COPY build.sh /tmp/build.sh
 
 
 RUN mkdir -p /var/lib/alternatives && \
-    /tmp/build.sh && \
-    ostree container commit
+  /tmp/build.sh && \
+  ostree container commit
 ## NOTES:
 # - /var/lib/alternatives is required to prevent failure with some RPM installs
 # - All RUN commands must end with ostree container commit
