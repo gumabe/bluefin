@@ -9,6 +9,7 @@ on:
   push:
     branches:
       - main
+      - aurora
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
