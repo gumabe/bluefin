@@ -10,11 +10,11 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
-dnf5 install -y tmux 
+dnf5 -y copr enable ublue-os/staging
+dnf5 install -y tmux libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit stow firefox jetbrains-mono-fonts python3-pip flameshot fedora-release-sway-atomic sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs kitty kitty-shell-integration kitty-terminfo alacritty inotify-tools inotify-tools-devel blueman wl-clipboard wlr-randr cmake cpio meson at qt5ct qt6ct qt6-qtsvg swappy yad pipewire-utils pipewire-alsa pavucontrol swaync pcmanfm xcompmgr copyq driverctl incus-client gamescope lightdm lightdm-settings
 
 # Use a COPR Example:
 #
-dnf5 -y copr enable ublue-os/staging
 # dnf5 -y install package
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
