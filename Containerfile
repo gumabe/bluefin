@@ -4,7 +4,7 @@ COPY build_files /
 
 # Base Image
 #FROM ghcr.io/ublue-os/bazzite-dx-nvidia-open:stable
-FROM ghcr.io/ublue-os/bazzite-dx-nvidia-open:stable
+FROM ghcr.io/ublue-os/aurora-dx-nvidia-open:stable
 
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
@@ -17,7 +17,11 @@ FROM ghcr.io/ublue-os/bazzite-dx-nvidia-open:stable
 
 ### MODIFICATIONS
 ## make modifications desired in your image and install packages by modifying the build.sh script
-## the following RUN directive does all the things required to run "build.sh" as recommended.
+
+#COPY --from=ghcr.io/ublue-os/ucore-kmods:stable /rpms/kmods/*.rpm /opt/rpms/                                                       
+#RUN mkdir -p /zfs                                                                                                         
+#COPY --from=ghcr.io/ublue-os/akmods-zfs:coreos-stable-42 /rpms/kmods/zfs/*.rpm /zfs
+# the following RUN directive does all the things required to run "build.sh" as recommended.
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
   --mount=type=cache,dst=/var/cache \
