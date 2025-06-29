@@ -1,7 +1,7 @@
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
-
+#COPY vendor /
 # Base Image
 #FROM ghcr.io/ublue-os/bazzite-dx-nvidia-open:stable
 FROM ghcr.io/ublue-os/aurora-dx-nvidia-open:stable
