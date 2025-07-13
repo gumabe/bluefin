@@ -16,8 +16,18 @@ dnf5 -y copr enable ilyaz/LACT
 
 #dnf5 -y remove zfs-fuse
 #dnf5 install /zfs/*.rpm
-dnf5 install -y tmux libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center mate-polkit stow firefox jetbrains-mono-fonts python3-pip flameshot fedora-release-sway-atomic sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs kitty kitty-shell-integration kitty-terminfo alacritty inotify-tools inotify-tools-devel blueman wl-clipboard wlr-randr cmake cpio meson at qt5ct qt6ct qt6-qtsvg swappy yad pipewire-utils pipewire-alsa pavucontrol swaync pcmanfm xcompmgr copyq driverctl incus-client gamescope lightdm lightdm-settings gamescope gnome-session-xsession libffi-devel libtool libX11-devel libxml2-devel lightdm lightdm-greeter sddm-conf wxGTK-devel stgit lact ncurses-devel tig  sway-config-fedora hyprland nwg-dock-hyprland
+# dnf5 install -y tmux libvirt-daemon-kvm libvirt-daemon-driver-storage-zfs \
+#   libvirt-daemon-driver-storage libvirt awesome mate-settings-daemon mate-control-center \
+#   mate-polkit stow firefox jetbrains-mono-fonts python3-pip flameshot fedora-release-sway-atomic \
+#   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs kitty kitty-shell-integration \
+#   kitty-terminfo alacritty inotify-tools inotify-tools-devel blueman wl-clipboard wlr-randr cmake \
+#   cpio meson at qt5ct qt6ct qt6-qtsvg swappy yad pipewire-utils pipewire-alsa pavucontrol swaync \
+#   pcmanfm xcompmgr copyq driverctl incus-client gamescope lightdm lightdm-settings gamescope gnome-session-xsession \
+#   libffi-devel libtool libX11-devel libxml2-devel lightdm lightdm-greeter \
+#   sddm-conf wxGTK-devel stgit lact ncurses-devel \
+#   tig sway-config-fedora hyprland nwg-dock-hyprland fedora-release-xfce
 
+dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic
 # Use a COPR Example:
 #
 # dnf5 -y install package
