@@ -27,7 +27,9 @@ dnf5 -y copr enable ilyaz/LACT
 #   sddm-conf wxGTK-devel stgit lact ncurses-devel \
 #   tig sway-config-fedora hyprland nwg-dock-hyprland fedora-release-xfce
 
-dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic
+dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
+  sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
+  libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swaync
 # Use a COPR Example:
 #
 # dnf5 -y install package
