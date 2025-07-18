@@ -12,6 +12,7 @@ set -ouex pipefail
 # this installs a package from fedora repos
 dnf5 -y copr enable ublue-os/staging
 dnf5 -y copr enable ilyaz/LACT
+dnf5 -y copr enable swayfx/swayfx
 #dnf5 -y install /ctx/keybase_amd64.rpm
 
 #dnf5 -y remove zfs-fuse
@@ -29,7 +30,9 @@ dnf5 -y copr enable ilyaz/LACT
 
 dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
-  libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swaync
+  libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
+  kitty-terminfo
+
 # Use a COPR Example:
 #
 # dnf5 -y install package
