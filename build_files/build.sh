@@ -33,7 +33,7 @@ dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-swa
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
   kitty-terminfo stgit lact ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at \
-  ghostty
+  ghostty pavucontrol
 
 # Use a COPR Example:
 #
