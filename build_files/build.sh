@@ -34,6 +34,7 @@ dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-swa
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
   kitty-terminfo stgit lact ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
   ghostty pavucontrol nwg-dock
+dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 
 # Use a COPR Example:
 #
