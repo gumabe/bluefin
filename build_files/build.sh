@@ -33,9 +33,9 @@ dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-swa
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
   kitty-terminfo stgit lact ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
-  ghostty pavucontrol nwg-dock  musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
+  ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
-  tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold g++ driverctl
+  tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold g++ driverctl cuda-gdb cuda-devel
 dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 
 # Use a COPR Example:
@@ -43,8 +43,8 @@ dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 # dnf5 -y install package
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
-dnf5 -y copr disable ublue-os/staging
-dnf5 -y copr disable ilyaz/LACT
+# dnf5 -y copr disable ublue-os/staging
+# dnf5 -y copr disable ilyaz/LACT
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
