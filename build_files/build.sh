@@ -14,6 +14,7 @@ dnf5 -y copr enable ublue-os/staging
 dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable swayfx/swayfx
 dnf5 -y copr enable scottames/ghostty
+dnf5 -y copr enable erikreider/SwayNotificationCenter
 #dnf5 -y install /ctx/keybase_amd64.rpm
 
 #dnf5 -y remove zfs-fuse
@@ -36,7 +37,7 @@ dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-swa
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl cuda-gdb cuda-devel chromium \
-  wlsunset fop swaync below
+  wlsunset fop swaync below SwayNotificationCenter
 dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 
 # Use a COPR Example:
