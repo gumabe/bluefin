@@ -39,7 +39,7 @@ dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-swa
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl cuda-gdb cuda-devel chromium \
-  wlsunset fop swaync below SwayNotificationCenter niri cava quickshell-git
+  wlsunset fop swaync below SwayNotificationCenter niri cava quickshell
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
