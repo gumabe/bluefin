@@ -16,6 +16,7 @@ dnf5 -y copr enable swayfx/swayfx
 dnf5 -y copr enable scottames/ghostty
 dnf5 -y copr enable erikreider/SwayNotificationCenter
 dnf5 -y copr enable errornointernet/quickshell
+dnf5 -y copr enable alternateved/cliphist
 #dnf5 -y install /ctx/keybase_amd64.rpm
 
 #dnf5 -y remove zfs-fuse
@@ -40,7 +41,7 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl cuda-gdb cuda-devel chromium \
   wlsunset fop swaync below SwayNotificationCenter niri cava quickshell \
-  qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++
+  qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
