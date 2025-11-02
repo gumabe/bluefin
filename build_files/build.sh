@@ -32,14 +32,15 @@ dnf5 -y copr enable errornointernet/quickshell
 #   tig sway-config-fedora hyprland nwg-dock-hyprland fedora-release-xfce
 dnf5 install -y g++
 dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
-dnf5 install -y tmux fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
+dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
   kitty-terminfo stgit lact ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl cuda-gdb cuda-devel chromium \
-  wlsunset fop swaync below SwayNotificationCenter niri cava quickshell
+  wlsunset fop swaync below SwayNotificationCenter niri cava quickshell \
+  qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
