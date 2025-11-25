@@ -39,7 +39,7 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   kitty-terminfo stgit lact ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
-  tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl cuda-gdb cuda-devel chromium \
+  tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
   wlsunset fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist
 
