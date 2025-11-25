@@ -11,7 +11,7 @@ set -ouex pipefail
 
 # this installs a package from fedora repos
 dnf5 -y copr enable ublue-os/staging
-dnf5 -y copr enable ilyaz/LACT
+#dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable swayfx/swayfx
 dnf5 -y copr enable scottames/ghostty
 dnf5 -y copr enable erikreider/SwayNotificationCenter
@@ -36,7 +36,7 @@ dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
-  kitty-terminfo stgit lact ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
+  kitty-terminfo stgit ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
@@ -51,7 +51,7 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
 # Disable COPRs so they don't end up enabled on the final image:
 # dnf5 -y copr disable ublue-os/staging
 dnf5 -y copr disable ublue-os/staging
-dnf5 -y copr disable ilyaz/LACT
+#dnf5 -y copr disable ilyaz/LACT
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
