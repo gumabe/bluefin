@@ -40,8 +40,9 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
-  wlsunset fop swaync below SwayNotificationCenter niri cava quickshell \
-  qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist
+  fop swaync below SwayNotificationCenter niri cava quickshell \
+  qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
+  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
@@ -52,6 +53,12 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
 # dnf5 -y copr disable ublue-os/staging
 dnf5 -y copr disable ublue-os/staging
 #dnf5 -y copr disable ilyaz/LACT
+#dnf5 -y copr enable ilyaz/LACT
+dnf5 -y copr disable swayfx/swayfx
+dnf5 -y copr disable scottames/ghostty
+dnf5 -y copr disable erikreider/SwayNotificationCenter
+dnf5 -y copr disable errornointernet/quickshell
+dnf5 -y copr disable alternateved/cliphist
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
