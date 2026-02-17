@@ -44,6 +44,7 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin
 
+
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
 # Use a COPR Example:
