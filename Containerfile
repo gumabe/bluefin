@@ -3,7 +3,7 @@ FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-FROM ghcr.io/ublue-os/bazzite-nvidia:stable
+FROM ghcr.io/ublue-os/bazzite-gnome-nvidia:stable
 #ghcr.io/wayblueorg/sway-nvidia-open
 #FROM ghcr.io/ublue-os/bazzite:stable
 
