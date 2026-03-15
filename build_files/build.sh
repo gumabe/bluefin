@@ -32,7 +32,7 @@ dnf5 -y copr enable alternateved/cliphist
 #   sddm-conf wxGTK-devel stgit lact ncurses-devel \
 #   tig sway-config-fedora hyprland nwg-dock-hyprland fedora-release-xfce
 dnf5 install -y g++
-dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
+dnf5 group install -y development-tools
 dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
@@ -42,8 +42,8 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
   fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
-  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin
-
+  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
+  cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
