@@ -43,7 +43,8 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
-  cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition
+  cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition \
+  grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar curl translate-shell wf-recorder ffmpeg
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
