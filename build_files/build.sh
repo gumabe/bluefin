@@ -64,6 +64,7 @@ FEDORA_PACKAGES=(
     virt-v2v
     virt-viewer
     ydotool
+    zsh
 )
 
 dnf5 -y install "${FEDORA_PACKAGES[@]}"
