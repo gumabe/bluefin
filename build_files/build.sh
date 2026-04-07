@@ -9,6 +9,76 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
+FEDORA_PACKAGES=(
+    android-tools
+    bcc
+    bpftop
+    bpftrace
+    cascadia-code-fonts
+    cockpit-bridge
+    cockpit-machines
+    cockpit-networkmanager
+    cockpit-ostree
+    cockpit-podman
+    cockpit-selinux
+    cockpit-storaged
+    cockpit-system
+    dbus-x11
+    edk2-ovmf
+    flatpak-builder
+    genisoimage
+    git-subtree
+    git-svn
+    iotop
+    libvirt
+    libvirt-nss
+    nicstat
+    numactl
+    osbuild-selinux
+    p7zip
+    p7zip-plugins
+    podman-compose
+    podman-machine
+    podman-tui
+    qemu
+    qemu-char-spice
+    qemu-device-display-virtio-gpu
+    qemu-device-display-virtio-vga
+    qemu-device-usb-redirect
+    qemu-img
+    qemu-system-x86-core
+    qemu-user-binfmt
+    qemu-user-static
+    rocm-hip
+    rocm-opencl
+    rocm-smi
+    sysprof
+    incus
+    incus-agent
+    lxc
+    tiptop
+    trace-cmd
+    udica
+    util-linux-script
+    virt-manager
+    virt-v2v
+    virt-viewer
+    ydotool
+)
+
+dnf5 -y install "${FEDORA_PACKAGES[@]}"
+
+
+dnf5 config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+#sudo dnf5 config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
+dnf5 -y install --enablerepo=docker-ce-stable \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-ce \
+    docker-ce-cli \
+    docker-compose-plugin \
+    docker-model-plugin
+
 # this installs a package from fedora repos
 dnf5 -y copr enable ublue-os/staging
 #dnf5 -y copr enable ilyaz/LACT
@@ -31,8 +101,12 @@ dnf5 -y copr enable alternateved/cliphist
 #   libffi-devel libtool libX11-devel libxml2-devel lightdm lightdm-greeter \
 #   sddm-conf wxGTK-devel stgit lact ncurses-devel \
 #   tig sway-config-fedora hyprland nwg-dock-hyprland fedora-release-xfce
+
+
 dnf5 install -y g++
 dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
+
+
 dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
@@ -43,6 +117,7 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin
+
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
