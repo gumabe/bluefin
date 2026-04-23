@@ -55,6 +55,9 @@ FEDORA_PACKAGES=(
     sysprof
     incus
     incus-agent
+    incus-tools
+    virtiofsd
+    cloud-utils
     lxc
     tiptop
     trace-cmd
