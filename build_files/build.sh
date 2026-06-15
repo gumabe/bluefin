@@ -108,19 +108,20 @@ dnf5 -y copr enable alternateved/cliphist
 
 
 dnf5 install -y g++
-dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
-
-
-dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
+dnf5 group install -y development-tools
+dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
-  kitty-terminfo stgit ncurses-devel tig blueman flameshot cpio cmake meson at ninja \
-  ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
+  kitty-terminfo stgit ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
+  ghostty pavucontrol musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
   fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
-  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin
+  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
+  cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition \
+  grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar translate-shell wf-recorder ffmpeg virtiofsd \
+  libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools
 
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
