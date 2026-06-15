@@ -1,0 +1,73 @@
+Build Image Log ----------
+ID:     alphacore
+Image:  localhost/alphacore
+Type:   qcow2
+Folder: /var/home/mathias/tools/gumabe/alphacore/custom
+----------
+{
+  "name": "alphacore-bootc-image-builder",
+  "Image": "quay.io/centos-bootc/bootc-image-builder:sha256-b5a27308b23384279184f0217339b781fa38c19132d05f8e39ce8bf8af2ae5ef",
+  "Tty": true,
+  "HostConfig": {
+    "Privileged": true,
+    "SecurityOpt": [
+      "label=type:unconfined_t"
+    ],
+    "Binds": [
+      "/var/home/mathias/tools/gumabe/alphacore/custom:/output/",
+      "/var/lib/containers/storage:/var/lib/containers/storage"
+    ]
+  },
+  "Labels": {
+    "bootc.image.builder": "true"
+  },
+  "Cmd": [
+    "localhost/alphacore:latest",
+    "--output",
+    "/output/",
+    "--local",
+    "--progress",
+    "verbose",
+    "--type",
+    "qcow2",
+    "--target-arch",
+    "amd64",
+    "--rootfs",
+    "xfs",
+    "--chown",
+    "1000:1000"
+  ]
+}
+----------
+podman \
+run \
+--rm \
+--name \
+alphacore-bootc-image-builder \
+--tty \
+--privileged \
+--security-opt \
+label=type:unconfined_t \
+-v \
+/var/home/mathias/tools/gumabe/alphacore/custom:/output/ \
+-v \
+/var/lib/containers/storage:/var/lib/containers/storage \
+--label \
+bootc.image.builder=true \
+quay.io/centos-bootc/bootc-image-builder:sha256-b5a27308b23384279184f0217339b781fa38c19132d05f8e39ce8bf8af2ae5ef \
+localhost/alphacore:latest \
+--output \
+/output/ \
+--local \
+--progress \
+verbose \
+--type \
+qcow2 \
+--target-arch \
+amd64 \
+--rootfs \
+xfs \
+--chown \
+1000:1000
+----------
+Command execution failed with exit code 127

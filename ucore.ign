@@ -1,0 +1,38 @@
+{
+  "ignition": {
+    "version": "3.4.0"
+  },
+  "kernelArguments": {
+    "shouldExist": [
+      "ignition.platform.id=qemu"
+    ]
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "plugdev",
+          "docker"
+        ],
+        "homeDir": "/home/mathias",
+        "name": "mathias",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDJn8hLw9pgZeqYrDrWnmJUeZ7sAEnhXZSkMbXKXS5PZ0/8rAYYtg60FO1f3DnNL7h5FIXiJ6SPADTpIieZnqWq9v2SDbuM0kZcA/Hwg+QbZZPUfgItWHS5GTyZSfADQQ3VN9AyKHUjMgwKUi9M1kDRLkDRWGk9XM5yZezPtRe6twHo5WM+dtWpC7L77pby8966b7GlcR6HxRBSF4q43q/3rEIYNjZsSNIp1Zh+FPw4PW1f4pEA0+kxMpgao2wvCGrvLRTqgwE7G1feiYiQPLJbMl4tF7vRWv16Y/cvEnfsH3Yc9vhhxiRC1hNmHA0qHerHiT0JyhKxSWrQorHRxlXJPz832i+4hVynxVgXsteFxcvRwGB8C2/KEG4kxmkmSJm+W3uviyjON1IaO7hWICc6+gtAzyMON47KdUQAEWA28KZ1irQIztdHpItbiq7OBGXDx90mew+ZinHVed+PXCvvEooVJXEg4686DFZivaYbqZdwpTvTNgoZ1Kf0yXxjUP3ZKQMoA6oEOgY2woD/h9Yx9kZTCOvpCu/X6uZpHp0HLIwi6j9CySjLiLeenogwoYGJ6imP4dF1A4920GNJgoieTUWXkzzeVCgyMNVxIH36DKURhD6EHsY+9NHoBfHGyFLsFCHFeHRBbayGRwRfk0Xun8SL9BB9hC0NOO1dGjJ8mQ== mathias@tix"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/cmdline.d/ignition-platform.conf",
+        "contents": {
+          "compression": "",
+          "source": "data:,ignition.platform.id%3Dqemu"
+        },
+        "mode": 420
+      }
+    ]
+  }
+}
