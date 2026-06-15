@@ -14,7 +14,7 @@ dnf5 -y copr enable ublue-os/staging
 #dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable swayfx/swayfx
 dnf5 -y copr enable scottames/ghostty
-dnf5 -y copr enable erikreider/SwayNotificationCenter
+#dnf5 -y copr enable erikreider/SwayNotificationCenter
 dnf5 -y copr enable errornointernet/quickshell
 dnf5 -y copr enable alternateved/cliphist
 #dnf5 -y install /ctx/keybase_amd64.rpm
@@ -36,7 +36,7 @@ dnf5 group install -y development-tools
 dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
-  kitty-terminfo stgit ncurses-devel wxGTK-devel tig blueman flameshot cpio cmake meson at ninja \
+  kitty-terminfo stgit ncurses-devel tig blueman flameshot cpio cmake meson at ninja \
   ghostty pavucontrol musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
@@ -59,7 +59,7 @@ dnf5 -y copr disable ublue-os/staging
 #dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr disable swayfx/swayfx
 dnf5 -y copr disable scottames/ghostty
-dnf5 -y copr disable erikreider/SwayNotificationCenter
+#dnf5 -y copr disable erikreider/SwayNotificationCenter
 dnf5 -y copr disable errornointernet/quickshell
 dnf5 -y copr disable alternateved/cliphist
 #### Example for enabling a System Unit File
