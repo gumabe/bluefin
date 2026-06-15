@@ -4,11 +4,15 @@ on:
   pull_request:
     branches:
       - main
+      - aurora
+      - alphacore
   schedule:
     - cron: '05 10 * * *'  # 10:05am UTC everyday
   push:
     branches:
       - main
+      - aurora
+      - alphacore
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
@@ -17,18 +21,44 @@ env:
   IMAGE_DESC: "My Customized Universal Blue Image"
   IMAGE_KEYWORDS: "bootc,ublue,universal-blue"
   IMAGE_LOGO_URL: "https://avatars.githubusercontent.com/u/120078124?s=200&v=4"  # Put your own image here for a fancy profile on https://artifacthub.io/!
-  IMAGE_NAME: "${{ github.event.repository.name }}"  # output image name, usually same as repo name
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}"  # do not edit
-  DEFAULT_TAG: "latest"
+  DEFAULT_TAG: "stable"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.brand_name}}-${{ inputs.stream_name }}
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
+  # Determines which branches to build:
+  #   - schedule: all image branches
+  #   - pull_request: the target branch (for naming; builds PR merge commit)
+  #   - push / workflow_dispatch: the branch that triggered the run
+  matrix-setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - name: Determine build matrix
+        id: set-matrix
+        run: |
+          # To add a new image branch, add it to the schedule list below and to the
+          # push/pull_request branch filters above.
+          if [ "${{ github.event_name }}" == "schedule" ]; then
+            echo 'matrix=["main","aurora","alphacore"]' >> $GITHUB_OUTPUT
+          elif [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo 'matrix=["${{ github.base_ref }}"]' >> $GITHUB_OUTPUT
+          else
+            echo 'matrix=["${{ github.ref_name }}"]' >> $GITHUB_OUTPUT
+          fi
+
   build_push:
-    name: Build and push image
+    needs: matrix-setup
+    name: Build and push image (${{ matrix.branch }})
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        branch: ${{ fromJSON(needs.matrix-setup.outputs.matrix) }}
+      fail-fast: false
 
     permissions:
       contents: read
@@ -36,15 +66,15 @@ jobs:
       id-token: write
 
     steps:
-      - name: Prepare environment
-        run: |
-          # Lowercase the image uri
-          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
-          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
-
-      # These stage versions are pinned by https://github.com/renovatebot/renovate
+      # For scheduled runs, explicitly check out the target branch so each matrix
+      # entry builds its own branch, not just main (where the schedule fires).
+      # For push/PR/dispatch, the default checkout ref is correct.
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with:
+          ref: ${{ github.event_name == 'schedule' && matrix.branch || '' }}
+
+      # These stage versions are pinned by https://github.com/renovatebot/renovate
 
       # You only use this action if the container-storage-action proves to be unreliable, you don't need to enable both
       # This is optional, but if you see that your builds are way too big for the runners, you can enable this by uncommenting the following lines:
@@ -57,10 +87,17 @@ jobs:
 
         # Fallback to the remove-unwanted-software-action if github doesn't allocate enough space
         # See: https://github.com/ublue-os/container-storage-action/pull/11
-        continue-on-error: true 
+        continue-on-error: true
         with:
           target-dir: /var/lib/containers
           mount-opts: compress-force=zstd:2
+
+      - name: Prepare environment
+        run: |
+          # Image name encodes the branch: ublue-os-<branch>
+          IMAGE_NAME="ublue-os-${{ matrix.branch }}"
+          echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+          echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
 
       - name: Get current date
         id: date
@@ -77,8 +114,7 @@ jobs:
         uses: docker/metadata-action@c299e40c65443455700f0fdfc63efafe5b349051 # v5
         id: metadata
         with:
-          # This generates all the tags for your image, you can add custom tags here too!
-          # Default tags are "$DEFAULT_TAG" and "$DEFAULT_TAG.$date".
+          # Tags: stable, stable.YYYYMMDD, YYYYMMDD, plus PR-specific tags
           tags: |
             type=raw,value=${{ env.DEFAULT_TAG }}
             type=raw,value=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
@@ -86,13 +122,13 @@ jobs:
             type=sha,enable=${{ github.event_name == 'pull_request' }}
             type=ref,event=pr
           labels: |
-            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/${{ github.sha }}/README.md
+            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/refs/heads/${{ matrix.branch }}/README.md
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
             org.opencontainers.image.description=${{ env.IMAGE_DESC }}
-            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/${{ github.sha }}/README.md
-            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/blob/${{ github.sha }}/Containerfile
+            org.opencontainers.image.documentation=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/refs/heads/${{ matrix.branch }}/README.md
+            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}/blob/${{ matrix.branch }}/Containerfile
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
-            org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/tree/${{ github.sha }}
+            org.opencontainers.image.url=https://github.com/${{ github.repository_owner }}/${{ github.event.repository.name }}
             org.opencontainers.image.vendor=${{ github.repository_owner }}
             org.opencontainers.image.version=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
             io.artifacthub.package.deprecated=false
@@ -110,8 +146,6 @@ jobs:
         with:
           containerfiles: |
             ./Containerfile
-          # Postfix image name with -custom to make it a little more descriptive
-          # Syntax: https://docs.github.com/en/actions/learn-github-actions/expressions#format
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
@@ -141,11 +175,10 @@ jobs:
       #       podman tag $IMAGE ${{ env.IMAGE_NAME }}:$tag
       #     done
 
-      # These `if` statements are so that pull requests for your custom images do not make it publish any packages under your name without you knowing
-      # They also check if the runner is on the default branch so that things like the merge queue (if you enable it), are going to work
+      # Push from any non-PR event (all listed branches publish their own image)
       - name: Login to GitHub Container Registry
         uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: github.event_name != 'pull_request'
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -153,7 +186,7 @@ jobs:
 
       - name: Push To GHCR
         uses: redhat-actions/push-to-registry@5ed88d269cf581ea9ef6dd6806d01562096bee9c # v2
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: github.event_name != 'pull_request'
         id: push
         env:
           REGISTRY_USER: ${{ github.actor }}
@@ -171,12 +204,12 @@ jobs:
       # to consume. For more details, review the image signing section of the README.
       - name: Install Cosign
         uses: sigstore/cosign-installer@faadad0cce49287aee09b3a48701e75088a2c6ad # v4.0.0
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: github.event_name != 'pull_request'
         with:
           cosign-release: 'v2.6.1'
 
       - name: Sign container image
-        if: github.event_name != 'pull_request' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        if: github.event_name != 'pull_request'
         run: |
           IMAGE_FULL="${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_NAME }}"
           for tag in ${{ steps.metadata.outputs.tags }}; do
