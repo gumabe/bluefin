@@ -10,14 +10,23 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # this installs a package from fedora repos
+#curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | pkexec tee >/etc/yum.repos.d/terra.repo
+
+#dnf5 config-manager addrepo --from-repofile=https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+
 dnf5 -y copr enable ublue-os/staging
 #dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable swayfx/swayfx
 dnf5 -y copr enable scottames/ghostty
 #dnf5 -y copr enable erikreider/SwayNotificationCenter
-dnf5 -y copr enable errornointernet/quickshell
-dnf5 -y copr enable alternateved/cliphist
+#dnf5 -y copr enable errornointernet/quickshell
+#dnf5 -y copr enable alternateved/cliphist
+#dnf5 -y --refresh upgrade
+dnf5 -y install terra-release
+dnf5 -y --enable-repo=terra install noctalia-shell
+#dnf5 -y install noctalia-shell
 #dnf5 -y install /ctx/keybase_amd64.rpm
+#dnf5 install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 
 #dnf5 -y remove zfs-fuse
 #dnf5 install /zfs/*.rpm
@@ -40,12 +49,12 @@ dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   ghostty pavucontrol musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git git-lfs \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
-  fop swaync below SwayNotificationCenter niri cava quickshell \
+  fop swaync below SwayNotificationCenter niri cava \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
   cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition \
   grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar translate-shell wf-recorder ffmpeg virtiofsd \
-  libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools
+  libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools htop xdg-desktop-portal
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
@@ -60,8 +69,8 @@ dnf5 -y copr disable ublue-os/staging
 dnf5 -y copr disable swayfx/swayfx
 dnf5 -y copr disable scottames/ghostty
 #dnf5 -y copr disable erikreider/SwayNotificationCenter
-dnf5 -y copr disable errornointernet/quickshell
-dnf5 -y copr disable alternateved/cliphist
+#dnf5 -y copr disable errornointernet/quickshell
+#dnf5 -y copr disable alternateved/cliphist
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
