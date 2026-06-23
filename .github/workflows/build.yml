@@ -73,7 +73,7 @@ jobs:
       # entry builds its own branch, not just main (where the schedule fires).
       # For push/PR/dispatch, the default checkout ref is correct.
       - name: Checkout
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           ref: ${{ github.event_name == 'schedule' && matrix.branch || '' }}
 
@@ -107,7 +107,7 @@ jobs:
       # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
       # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
       - name: Image Metadata
-        uses: docker/metadata-action@902fa8ec7d6ecbf8d84d538b9b233a880e428804 # v5
+        uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6.1.0
         id: metadata
         with:
           # Tags: stable, stable.YYYYMMDD, YYYYMMDD, plus PR-specific tags
@@ -138,7 +138,7 @@ jobs:
 
       - name: Build Image
         id: build_image
-        uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
+        uses: redhat-actions/buildah-build@061ffd31bb5c3f8733a6f9bbdf00a9fb02eb708c # node24 (main; no release tag yet)
         with:
           containerfiles: |
             ./Containerfile
@@ -173,7 +173,7 @@ jobs:
 
       # Push from any non-PR event (all listed branches publish their own image)
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3
+        uses: docker/login-action@650006c6eb7dba73a995cc03b0b2d7f5ca915bee # v4.2.0
         if: github.event_name != 'pull_request'
         with:
           registry: ghcr.io
