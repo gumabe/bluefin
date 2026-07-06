@@ -54,7 +54,8 @@ dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
   cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition \
   grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar translate-shell wf-recorder ffmpeg virtiofsd \
-  libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools htop xdg-desktop-portal
+  libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools htop xdg-desktop-portal \
+  cockpit-machines cockpit-bridge cockpit-image-builder
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
