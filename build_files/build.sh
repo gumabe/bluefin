@@ -42,6 +42,12 @@ dnf5 -y --enable-repo=terra install noctalia-shell
 #   tig sway-config-fedora hyprland nwg-dock-hyprland fedora-release-xfce
 dnf5 install -y g++
 dnf5 group install -y development-tools
+
+# wxGTK-devel (below) requires libGLU-devel, provided only by Fedora's mesa-libGLU-devel.
+# Bazzite sets `exclude=mesa-*` on all repos to protect its terra-mesa, which also filters
+# out mesa-libGLU-devel. Install just this package with the exclude bypassed; the runtime
+# mesa-libGLU is already present and mesa itself is untouched.
+dnf5 install -y --setopt="*.exclude=" mesa-libGLU-devel
 dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
@@ -55,7 +61,7 @@ dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition \
   grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar translate-shell wf-recorder ffmpeg virtiofsd \
   libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools htop xdg-desktop-portal \
-  cockpit-machines cockpit-bridge cockpit-image-builder
+  cockpit-machines cockpit-bridge cockpit-image-builder wxGTK-devel wxGTK-gl
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
