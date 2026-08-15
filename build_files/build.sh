@@ -22,8 +22,8 @@ dnf5 -y copr enable scottames/ghostty
 #dnf5 -y copr enable errornointernet/quickshell
 #dnf5 -y copr enable alternateved/cliphist
 #dnf5 -y --refresh upgrade
-dnf5 -y install terra-release
-dnf5 -y --enable-repo=terra install noctalia-shell
+#dnf5 -y install terra-release
+#dnf5 -y --enable-repo=terra install noctalia-shell
 #dnf5 -y install noctalia-shell
 #dnf5 -y install /ctx/keybase_amd64.rpm
 #dnf5 install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
