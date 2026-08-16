@@ -5,12 +5,14 @@ on:
     branches:
       - main
       - aurora
+      - bumpm
   schedule:
     - cron: '05 10 * * *'  # 10:05am UTC everyday
   push:
     branches:
       - main
       - aurora
+      - bumpm
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
@@ -39,10 +41,25 @@ jobs:
 
     steps:
       - name: Prepare environment
+        env:
+          BRANCH: ${{ github.event_name == 'pull_request' && github.base_ref || github.ref_name }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           # Lowercase the image uri
           echo "IMAGE_REGISTRY=${IMAGE_REGISTRY,,}" >> ${GITHUB_ENV}
           echo "IMAGE_NAME=${IMAGE_NAME,,}" >> ${GITHUB_ENV}
+
+          # Tag images after the branch they were built from, so that branches
+          # don't overwrite each other's tags. The default branch keeps "latest".
+          if [[ "${BRANCH}" == "${DEFAULT_BRANCH}" ]]; then
+            TAG="latest"
+          else
+            # Sanitize: lowercase, and replace anything not [a-z0-9._-] (e.g. "/") with "-"
+            TAG="${BRANCH,,}"
+            TAG="${TAG//[^a-z0-9._-]/-}"
+          fi
+          echo "DEFAULT_TAG=${TAG}" >> ${GITHUB_ENV}
+          echo "Building with tag: ${TAG}"
 
       # These stage versions are pinned by https://github.com/renovatebot/renovate
       - name: Checkout
@@ -72,7 +89,7 @@ jobs:
           tags: |
             type=raw,value=${{ env.DEFAULT_TAG }}
             type=raw,value=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
-            type=raw,value={{date 'YYYYMMDD'}}
+            type=raw,value={{date 'YYYYMMDD'}},enable=${{ github.ref_name == github.event.repository.default_branch }}
             type=sha,enable=${{ github.event_name == 'pull_request' }}
             type=ref,event=pr
           labels: |
