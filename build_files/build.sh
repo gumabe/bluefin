@@ -61,7 +61,10 @@ dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   cloud-utils nm-applet testdisk nmap incus-tools cloud-utils butane ignition \
   grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar translate-shell wf-recorder ffmpeg virtiofsd \
   libcap-ng-devel libseccomp-devel curl gparted waypipe incus-tools htop xdg-desktop-portal \
-  cockpit-machines cockpit-bridge cockpit-image-builder wxGTK-devel wxGTK-gl
+  cockpit-machines cockpit-bridge cockpit-image-builder wxGTK-devel wxGTK-gl \
+  ddrescue jemalloc-devel json-devel kernel-tools libcurl-devel libEGL-devel libjxl-devel libqalculate-devel librsvg2-devel libsecret-devel \
+  libsndfile-devel libsodium-devel md4c-devel noctalia pam-devel pipewire-devel polkit-devel sdbus-cpp-devel stb_image_resize2-devel \
+  stb_image_write-devel tomlplusplus-devel wayland-protocols-devel wireplumber-devel
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
