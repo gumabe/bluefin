@@ -110,6 +110,14 @@ dnf5 -y copr enable alternateved/cliphist
 dnf5 install -y g++
 dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 
+# wxGTK-devel (below) needs libGLU-devel, i.e. GL/glu.h, which only Fedora's
+# mesa-libGLU-devel ships. Without it wx/configure prints "No GLU headers found, wx
+# will NOT be usable" and Erlang/OTP builds end up without the wx application.
+# Bazzite excludes `mesa-*` on its *fedora*, *negativo17* and *staging* repos to
+# protect its own mesa build, and that glob also swallows mesa-libGLU-devel. Install
+# just this one package with the excludes bypassed; mesa itself is untouched. On
+# non-Bazzite bases there is no exclude and this is a plain install.
+dnf5 install -y --setopt="*.exclude=" mesa-libGLU-devel
 
 dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
@@ -120,7 +128,8 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
   fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
-  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin
+  google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
+  wxGTK-devel wxGTK-gl unixODBC-devel lksctp-tools-devel libxslt java-latest-openjdk-devel
 
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
