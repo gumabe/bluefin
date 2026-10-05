@@ -119,6 +119,16 @@ dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 # non-Bazzite bases there is no exclude and this is a plain install.
 dnf5 install -y --setopt="*.exclude=" mesa-libGLU-devel
 
+# Two -devel packages from the bluebox branch's list are deliberately NOT carried over
+# here, because bluebox builds on Aurora while this image builds on Bazzite, which
+# swaps several Fedora runtimes for Terra forks whose -devel subpackages do not exist:
+#   * libEGL-devel   -> only Fedora's mesa-libEGL-devel provides it, and that needs
+#                       Fedora's mesa-libEGL, which the mesa-* exclude blocks and which
+#                       Terra's mesa-libEGL 1:26.2.2-3 already replaces. libglvnd-devel
+#                       is used instead -- it is what actually ships EGL/egl.h.
+#   * wireplumber-devel -> requires Fedora's wireplumber, which Conflicts: with the
+#                       installed terra-wireplumber. No Terra -devel variant exists.
+
 dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
@@ -129,7 +139,14 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   fop swaync below SwayNotificationCenter niri cava quickshell \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
-  wxGTK-devel wxGTK-gl unixODBC-devel lksctp-tools-devel libxslt java-latest-openjdk-devel
+  wxGTK-devel wxGTK-gl unixODBC-devel lksctp-tools-devel libxslt java-latest-openjdk-devel \
+  butane ignition nm-applet testdisk nmap gparted ddrescue htop waypipe xdg-desktop-portal translate-shell \
+  grim slurp wl-clipboard tesseract tesseract-langpack-eng ImageMagick zbar wf-recorder ffmpeg \
+  cockpit-image-builder git-lfs curl kernel-tools noctalia \
+  jemalloc-devel json-devel libcap-ng-devel libcurl-devel libglvnd-devel libjxl-devel libqalculate-devel \
+  librsvg2-devel libseccomp-devel libsecret-devel libsndfile-devel libsodium-devel md4c-devel pam-devel \
+  pipewire-devel polkit-devel sdbus-cpp-devel stb_image_resize2-devel stb_image_write-devel \
+  tomlplusplus-devel wayland-protocols-devel
 
 
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
