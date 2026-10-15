@@ -66,6 +66,12 @@ dnf5 install -y tmux python3 qtile-extras fedora-release-sway-atomic \
   libsndfile-devel libsodium-devel md4c-devel noctalia pam-devel pipewire-devel polkit-devel sdbus-cpp-devel stb_image_resize2-devel \
   stb_image_write-devel tomlplusplus-devel wayland-protocols-devel wireplumber-devel
 
+# /opt -> /var/opt on atomic images, and /var isn't shipped. Install there, then move
+# keybase into /usr/lib/opt and link it back at boot.
+mkdir -p /var/opt
+dnf5 install -y https://prerelease.keybase.io/keybase_amd64.rpm
+mv /var/opt/keybase /usr/lib/opt/keybase
+echo 'L /var/opt/keybase - - - - /usr/lib/opt/keybase' >/usr/lib/tmpfiles.d/keybase-opt.conf
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
 # Use a COPR Example:

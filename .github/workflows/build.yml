@@ -136,6 +136,12 @@ jobs:
           sep-tags: " "
           sep-annotations: " "
 
+      # Pin the base by digest and pick the ucore ZFS kmods matching its kernel.
+      # Fails (keeping the last good image) if no ZFS build exists for that kernel yet.
+      - name: Resolve base image and ZFS kmods
+        shell: bash  # implies pipefail, so a failed lookup fails the step
+        run: ./scripts/resolve-zfs.sh | tee -a ${GITHUB_ENV}
+
       - name: Build Image
         id: build_image
         uses: redhat-actions/buildah-build@061ffd31bb5c3f8733a6f9bbdf00a9fb02eb708c # node24 (main; no release tag yet)
@@ -145,6 +151,9 @@ jobs:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          build-args: |
+            BASE_IMAGE=${{ env.BASE_IMAGE }}
+            ZFS_AKMODS=${{ env.ZFS_AKMODS }}
           oci: false
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.

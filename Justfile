@@ -94,6 +94,11 @@ build $target_image=image_name $tag=default_tag:
         BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
     fi
 
+    ZFS_ARGS=$(./scripts/resolve-zfs.sh) || exit 1
+    for arg in ${ZFS_ARGS}; do
+        BUILD_ARGS+=("--build-arg" "${arg}")
+    done
+
     podman build \
         "${BUILD_ARGS[@]}" \
         --pull=newer \
