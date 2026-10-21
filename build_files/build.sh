@@ -84,14 +84,23 @@ dnf5 -y install --enablerepo=docker-ce-stable \
     docker-model-plugin
 
 # this installs a package from fedora repos
+#curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | pkexec tee >/etc/yum.repos.d/terra.repo
+
+#dnf5 config-manager addrepo --from-repofile=https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo
+
 dnf5 -y copr enable ublue-os/staging
 #dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr enable swayfx/swayfx
 dnf5 -y copr enable scottames/ghostty
-dnf5 -y copr enable erikreider/SwayNotificationCenter
-dnf5 -y copr enable errornointernet/quickshell
-dnf5 -y copr enable alternateved/cliphist
+#dnf5 -y copr enable erikreider/SwayNotificationCenter
+#dnf5 -y copr enable errornointernet/quickshell
+#dnf5 -y copr enable alternateved/cliphist
+#dnf5 -y --refresh upgrade
+#dnf5 -y install terra-release
+#dnf5 -y --enable-repo=terra install noctalia-shell
+#dnf5 -y install noctalia-shell
 #dnf5 -y install /ctx/keybase_amd64.rpm
+#dnf5 install --nogpgcheck --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' terra-release
 
 #dnf5 -y remove zfs-fuse
 #dnf5 install /zfs/*.rpm
@@ -136,7 +145,7 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   ghostty pavucontrol nwg-dock musl-gcc gcc clang cmake alsa-lib-devel fontconfig-devel wayland-devel libxcb-devel \
   libxkbcommon-x11-devel openssl-devel libzstd-devel vulkan-loader sqlite-devel jq git \
   tar perl-FindBin perl-IPC-Cmd perl-File-Compare perl-File-Copy mold driverctl chromium \
-  fop swaync below SwayNotificationCenter niri cava quickshell \
+  fop swaync below SwayNotificationCenter niri cava \
   qt6-qtbase-devel qt6-qtdeclarative-devel cmake gcc-c++ cliphist musl-libc-static \
   google-noto-sans-fonts plocate Thunar wlsunset thunar-vcs-plugin thunar-volman gtkhash-thunar thunar-media-tags-plugin \
   wxGTK-devel wxGTK-gl unixODBC-devel lksctp-tools-devel libxslt java-latest-openjdk-devel \
@@ -149,6 +158,12 @@ dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-rel
   tomlplusplus-devel wayland-protocols-devel
 
 
+# /opt -> /var/opt on atomic images, and /var isn't shipped. Install there, then move
+# keybase into /usr/lib/opt and link it back at boot.
+mkdir -p /var/opt
+dnf5 install -y https://prerelease.keybase.io/keybase_amd64.rpm
+mv /var/opt/keybase /usr/lib/opt/keybase
+echo 'L /var/opt/keybase - - - - /usr/lib/opt/keybase' >/usr/lib/tmpfiles.d/keybase-opt.conf
 #dnf5 -y install @core @base-graphical @workstation-product @container-management @hardware-support @printing @gnome-desktop @firefox
 
 # Use a COPR Example:
@@ -161,9 +176,9 @@ dnf5 -y copr disable ublue-os/staging
 #dnf5 -y copr enable ilyaz/LACT
 dnf5 -y copr disable swayfx/swayfx
 dnf5 -y copr disable scottames/ghostty
-dnf5 -y copr disable erikreider/SwayNotificationCenter
-dnf5 -y copr disable errornointernet/quickshell
-dnf5 -y copr disable alternateved/cliphist
+#dnf5 -y copr disable erikreider/SwayNotificationCenter
+#dnf5 -y copr disable errornointernet/quickshell
+#dnf5 -y copr disable alternateved/cliphist
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
