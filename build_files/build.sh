@@ -73,7 +73,9 @@ FEDORA_PACKAGES=(
 dnf5 -y install "${FEDORA_PACKAGES[@]}"
 
 
-dnf5 config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+# aurora-dx already ships docker-ce.repo (disabled); only add it on bases that don't
+[[ -f /etc/yum.repos.d/docker-ce.repo ]] ||
+    dnf5 config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
 #sudo dnf5 config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
 dnf5 -y install --enablerepo=docker-ce-stable \
     containerd.io \
