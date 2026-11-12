@@ -138,7 +138,7 @@ dnf5 install -y --setopt="*.exclude=" mesa-libGLU-devel
 #   * wireplumber-devel -> requires Fedora's wireplumber, which Conflicts: with the
 #                       installed terra-wireplumber. No Terra -devel variant exists.
 
-dnf5 install -y tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
+dnf5 install -y --skip-unavailable tmux python3 fedora-release-xfce awesome qtile-extras fedora-release-sway-atomic \
   sway-config-fedora terminator neovim netcat emacs-gtk+x11 emacs libtool libffi-devel \
   libtool libX11-devel libxml2-devel pcmanfm inotify-tools inotify-tools-devel swayfx kitty kitty-shell-integration \
   kitty-terminfo stgit ncurses-devel tig blueman flameshot cpio cmake meson at ninja \
