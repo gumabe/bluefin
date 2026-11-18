@@ -73,15 +73,17 @@ FEDORA_PACKAGES=(
 dnf5 -y install "${FEDORA_PACKAGES[@]}"
 
 
-dnf5 config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
-#sudo dnf5 config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
-dnf5 -y install --enablerepo=docker-ce-stable \
-    containerd.io \
-    docker-buildx-plugin \
-    docker-ce \
-    docker-ce-cli \
-    docker-compose-plugin \
-    docker-model-plugin
+# aurora-dx already ships Docker CE (and its repo); only non-DX bases need this.
+if ! rpm -q docker-ce >/dev/null; then
+    dnf5 config-manager addrepo --from-repofile=https://download.docker.com/linux/fedora/docker-ce.repo
+    dnf5 -y install --enablerepo=docker-ce-stable \
+        containerd.io \
+        docker-buildx-plugin \
+        docker-ce \
+        docker-ce-cli \
+        docker-compose-plugin \
+        docker-model-plugin
+fi
 
 # this installs a package from fedora repos
 #curl -fsSL https://github.com/terrapkg/subatomic-repos/raw/main/terra.repo | pkexec tee >/etc/yum.repos.d/terra.repo
@@ -128,9 +130,10 @@ dnf5 group install -y cosmic-desktop cosmic-desktop-apps development-tools
 # non-Bazzite bases there is no exclude and this is a plain install.
 dnf5 install -y --setopt="*.exclude=" mesa-libGLU-devel
 
-# Two -devel packages from the bluebox branch's list are deliberately NOT carried over
-# here, because bluebox builds on Aurora while this image builds on Bazzite, which
-# swaps several Fedora runtimes for Terra forks whose -devel subpackages do not exist:
+# Two -devel packages from the bluebox branch's list were left out while this image
+# was built on Bazzite, which swaps several Fedora runtimes for Terra forks whose
+# -devel subpackages do not exist. Now that it is on Aurora again they could be
+# re-added (untested):
 #   * libEGL-devel   -> only Fedora's mesa-libEGL-devel provides it, and that needs
 #                       Fedora's mesa-libEGL, which the mesa-* exclude blocks and which
 #                       Terra's mesa-libEGL 1:26.2.2-3 already replaces. libglvnd-devel
