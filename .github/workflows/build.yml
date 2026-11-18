@@ -7,6 +7,7 @@ on:
       - aurora
       - alphacore
       - bluebox
+      - bumpm
   schedule:
     - cron: '05 10 * * *'  # 10:05am UTC everyday
   push:
@@ -15,6 +16,7 @@ on:
       - aurora
       - alphacore
       - bluebox
+      - bumpm
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
@@ -47,7 +49,7 @@ jobs:
           # To add a new image branch, add it to the schedule list below and to the
           # push/pull_request branch filters above.
           if [ "${{ github.event_name }}" == "schedule" ]; then
-            echo 'matrix=["main","aurora","alphacore","bluebox"]' >> $GITHUB_OUTPUT
+            echo 'matrix=["main","aurora","alphacore","bluebox","bumpm"]' >> $GITHUB_OUTPUT
           elif [ "${{ github.event_name }}" == "pull_request" ]; then
             echo 'matrix=["${{ github.base_ref }}"]' >> $GITHUB_OUTPUT
           else
